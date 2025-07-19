@@ -1,0 +1,24 @@
+version: '3.8'
+
+# Development overrides for docker-compose
+# This file is automatically loaded by docker-compose for local development
+
+services:
+  api:
+    environment:
+      ENVIRONMENT: development
+      LOG_LEVEL: debug
+    volumes:
+      # Mount source code for development (optional - for hot reload if implemented)
+      - .:/app/src:ro
+    # Override build for development if needed
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.dev
+
+  postgres:
+    ports:
+      - "5432:5432"
+    # Add development-specific postgres configuration if needed
+    environment:
+      POSTGRES_DB: todoapi_dev
